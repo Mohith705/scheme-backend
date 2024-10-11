@@ -1,0 +1,162 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model ORIGIN_SCHEMETYPE {
+    id         Int     @id @default(autoincrement())
+    SchemeType String? @unique
+    SchemeMode String?
+}
+
+model ORIGIN_SCHEME_NAME {
+    id             Int      @id @default(autoincrement())
+    SchemeCode     String   @unique
+    SchemeType     String?
+    SchemeName     String?  @unique
+    SchemeAmount   Float?
+    SchemeDuration Float?
+    SchemePersons  Float?
+    BonusMonth     Float?
+    BonusAmount    Float?
+    SchemeValue    Float?
+    Commper        Float?
+    Commamt        Float?
+    Continuous     Boolean?
+}
+
+model ORIGIN_SCHEME_USER {
+    id              Int     @id @default(autoincrement())
+    SchemeType      String?
+    SchemeName      String?
+    SchemeCode      String?
+    MemberName      String?
+    CardNo          String  @unique
+    Gender          String?
+    City            String?
+    Address         String?
+    Pincode         Float?
+    State           String?
+    District        String?
+    LandLine        String?
+    Mobile1         String?
+    Mobile2         String?
+    Email           String?
+    Dob             String?
+    Anniversary     String?
+    Nominee         String?
+    MobileNo        String?
+    Incharge        String?
+    JoinDate        String?
+    CollectionPoint String?
+    LastDatePaid    String?
+    ActualDateToPay String?
+    NextDateToPay   String?
+}
+
+model ORIGIN_SCHEME_USER_CARD {
+    id        Int       @id @default(autoincrement())
+    CardNo    String    @unique
+    Month     DateTime?
+    RecNo     String?
+    RecDate   DateTime?
+    RecAmt    Float?
+    GoldWt    Float?
+    GoldAmt   Float?
+    ModeOfPay String?
+    Balance   Float?
+}
+
+model ORIGIN_SCHEME_USER_SETTLEMENT {
+    id            Int      @id @default(autoincrement())
+    SchemeType    String?
+    SchemeName    String?
+    CardNo        String   @unique
+    MemberName    String?
+    MobileNo      String?
+    SchemeAmount  Float?
+    PaidAmount    Float?
+    BalanceAmount Float?
+    GoldWt        Float?
+    GoldAmt       Float?
+    Settled       Boolean?
+    Discontinue   Boolean?
+    Description   String?
+    Date          String?
+    VoucherNo     String?  @unique
+}
+
+model ORIGIN_SCHEME_RECEIPT {
+    id                Int      @id @default(autoincrement())
+    ReceiptNo         String   @unique
+    ReceiptDate       String?
+    CardNo            String?
+    SchemeType        String?
+    SchemeName        String?
+    SchemeCode        String?
+    MobileNo          String?
+    MemberName        String?
+    Address           String?
+    CollectionPoint   Boolean?
+    CashDesc          String?
+    CashAmount        Int?
+    CardDesc          String?
+    CardAmount        Int?
+    OnlineParticulars String?
+    OnlineAcc         String?
+    OnlineDesc        String?
+    OnlineAmount      Int?
+    UPIParticulars    String?
+    UPIAcc            String?
+    UPIDesc           String?
+    UPIAmount         Int?
+    Description       String?
+    Amount            Int
+    GoldWt            Float?
+    GoldAmount        Float?
+    Incharge          String?
+}
+
+model LOGIN_USER {
+    id       Int    @id @default(autoincrement())
+    UserName String @unique
+    Password String
+}
+
+model ONLINEMODE_MAST {
+    id      Int     @id @default(autoincrement())
+    PMODE   String?
+    PAYMODE String?
+    ACCNO   String?
+    ACCNAME String?
+}
+
+model MOBILE_LOGIN {
+    id          Int     @id @default(autoincrement())
+    MemberName  String?
+    Gender      String?
+    City        String?
+    Address     String?
+    Pincode     Float?
+    State       String?
+    District    String?
+    MobileNo    String? @unique
+    Password    String?
+    Email       String?
+    Dob         String?
+    Anniversary String?
+}
+
+model FEEDBACK {
+    id         Int      @id @default(autoincrement())
+    MemberName String?
+    Email      String?
+    MobileNo   String?
+    Category   String?
+    Feedback   String?
+    created_at DateTime @default(now())
+}
